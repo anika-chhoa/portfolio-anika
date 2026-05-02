@@ -1,37 +1,11 @@
 import Link from "next/link";
+import { projects } from "@/data/projects";
 
 export default function Projects() {
-  const projects = [
-    {
-      id: "01",
-      category: "E-COMMERCE",
-      title: "Sun Cart - Summer Essentials",
-      description:
-        "A modern summer essentials e-commerce platform built with Next.js, featuring product browsing, category-based filtering, and a smooth user experience. Designed with a clean, responsive UI to help users explore and purchase seasonal items such as clothing, accessories, skincare, and gadgets efficiently.",
-      tags: ["Next JS", "Tailwind", "Better Auth"],
-      image: "https://i.ibb.co/hxc4cSR4/Screenshot-2026-05-02-182030.png",
-      reverse: true,
-      live: "https://sun-cart-sooty.vercel.app/",
-      code: "https://github.com/anika-chhoa/sun-cart.git",
-    },
-    {
-      id: "02",
-      category: "NEWS PLATFORM",
-      title: "Dragon News",
-      description:
-        "A modern news platform built with Next.js, featuring dynamic API-driven content, secure authentication using Better Auth, and social login integration with Google and GitHub. Designed with a clean, responsive UI to deliver a seamless and user-friendly reading experience.",
-      tags: ["Next.js", "Tailwind", "Better Auth"],
-      image: "https://i.ibb.co/bgjR97tH/Screenshot-2026-05-02-181347.png",
-      reverse: false,
-      live: "https://dragon-news-gray.vercel.app/",
-      code: "https://github.com/anika-chhoa/dragon-news.git",
-    },
-  ];
-
   return (
-    <section className="mb-section-gap" id="projects">
-      <div className="flex justify-between items-end mb-12">
-        <h2 className="font-inter text-4xl font-bold text-on-surface">
+    <section className="mb-section-gap px-6 md:px-12" id="projects">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+        <h2 className="font-inter text-3xl md:text-4xl font-bold text-on-surface">
           Featured Projects
         </h2>
 
@@ -47,74 +21,54 @@ export default function Projects() {
         </a>
       </div>
 
-      <div className="grid gap-element-gap">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
             key={project.id}
-            className="bg-surface border border-outline rounded-2xl overflow-hidden grid lg:grid-cols-2 shadow-premium hover:shadow-xl transition-shadow duration-300"
+            className="bg-surface border border-outline rounded-2xl overflow-hidden flex flex-col shadow-premium hover:shadow-xl transition-all duration-300 group"
           >
             {/* Image */}
-            <div
-              className={`h-64 lg:h-full relative group overflow-hidden ${project.reverse ? "order-1 lg:order-2" : ""
-                }`}
-            >
+            <div className="h-48 relative overflow-hidden">
               <img
-                className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-500"
                 src={project.image}
                 alt={project.title}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-surface/40 to-transparent"></div>
             </div>
 
             {/* Content */}
-            <div
-              className={`p-card-padding flex flex-col justify-center ${project.reverse ? "order-2 lg:order-1" : ""
-                }`}
-            >
-              <span className="text-primary font-space text-xs font-bold mb-2">
-                {project.id} / {project.category}
+            <div className="p-6 flex flex-col flex-1">
+              <span className="text-primary font-space text-[10px] font-bold mb-2 uppercase tracking-wider">
+                {project.number} / {project.category}
               </span>
 
-              <h3 className="font-inter text-3xl font-bold text-on-surface mb-4">
+              <h3 className="font-inter text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
 
-              <p className="text-on-surface-variant mb-6">
+              <p className="text-on-surface-variant text-sm line-clamp-3 mb-6">
                 {project.description}
               </p>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {project.tags.map((tag, i) => (
+              <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+                {project.tags.slice(0, 3).map((tag, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 bg-primary-container border border-primary/10 rounded-full text-xs text-primary font-medium"
+                    className="px-2 py-1 bg-primary-container border border-primary/10 rounded text-[9px] text-primary font-medium uppercase"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* Links */}
-              <div className="flex gap-4">
-                <a
-                  href={project.live}
-                  target="_blank"
-                  className="flex items-center gap-2 text-primary font-bold hover:text-primary-hover transition-all"
-                >
-                  <span className="material-symbols-outlined">link</span>
-                  Live Demo
-                </a>
-
-                <a
-                  href={project.code}
-                  target="_blank"
-                  className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  <span className="material-symbols-outlined">terminal</span>
-                  Source Code
-                </a>
-              </div>
+              <Link
+                href={`/projects/${project.id}`}
+                className="w-full py-3 bg-surface border border-primary/20 text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all text-center text-sm shadow-sm"
+              >
+                View Details
+              </Link>
             </div>
           </div>
         ))}
