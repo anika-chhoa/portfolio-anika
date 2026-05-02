@@ -38,10 +38,10 @@ export default function Hero() {
   ];
 
   return (
-    <div className="min-h-[90vh] flex flex-col md:flex-row items-center gap-10 pt-32 mb-section-gap px-6 md:px-12 relative overflow-hidden" id="hero">
-      
+    <div className="min-h-[90vh] flex flex-col lg:flex-row items-center gap-10 pt-32 mb-section-gap px-6 md:px-12 relative overflow-hidden" id="hero">
+
       {/* Social Links - Side Slide In */}
-      <div className="flex flex-row md:flex-col justify-center gap-8 order-2 md:order-1 relative z-10">
+      <div className="flex flex-row lg:flex-col justify-center gap-8 order-2 lg:order-1 relative z-10">
         {socialLinks.map((link, index) => (
           <motion.a
             key={index}
@@ -61,20 +61,20 @@ export default function Hero() {
       </div>
 
       {/* Text Section */}
-      <div className="flex-1 space-y-8 text-center md:text-left order-3 md:order-2 relative z-10">
+      <div className="flex-1 space-y-8 text-center lg:text-left order-3 lg:order-2 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 
+          <h1
             ref={nameRef}
-            className="font-inter text-5xl md:text-8xl font-extrabold text-on-surface leading-tight overflow-hidden pb-2"
+            className="font-inter text-5xl lg:text-8xl font-extrabold text-on-surface leading-tight overflow-hidden pb-2"
           >
             Anika Mizan
           </h1>
 
-          <h2 className="text-xl md:text-2xl font-semibold text-primary font-space uppercase tracking-[0.2em] mt-4">
+          <h2 className="text-xl lg:text-2xl font-semibold text-primary font-space uppercase tracking-[0.2em] mt-4">
             I am a{" "}
             <TypeAnimation
               sequence={[
@@ -93,7 +93,7 @@ export default function Hero() {
           </h2>
         </motion.div>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
@@ -104,16 +104,16 @@ export default function Hero() {
           that bridge the gap between complex data and intuitive user interfaces.
         </motion.p>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.5, duration: 0.5 }}
-          className="flex flex-wrap justify-center md:justify-start gap-6 pt-4"
+          className="flex flex-wrap justify-center lg:justify-start gap-6 pt-4"
         >
           <motion.a
             href="#"
-            whileHover={{ 
-              scale: 1.05, 
+            whileHover={{
+              scale: 1.05,
               boxShadow: "0 0 20px rgba(16, 185, 129, 0.4)",
               backgroundColor: "var(--primary-hover)"
             }}
@@ -127,21 +127,21 @@ export default function Hero() {
       </div>
 
       {/* Image Section - Floating & Parallax */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="flex justify-center order-1 md:order-3 relative"
+        className="flex justify-center order-1 lg:order-3 relative"
       >
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             y: [0, -20, 0],
             rotate: [0, 2, 0]
           }}
-          transition={{ 
-            duration: 6, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
           }}
           className="relative w-[280px] sm:w-[320px] md:w-[420px] h-[340px] sm:h-[380px] md:h-[520px] rounded-[2.5rem] overflow-hidden shadow-2xl border-2 border-primary/20 p-2 bg-surface-variant"
         >
