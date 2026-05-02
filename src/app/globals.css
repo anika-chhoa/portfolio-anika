@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-container: var(--primary-container);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-variant: var(--surface-variant);
+  --color-surface-container: var(--surface-container);
+  --color-on-background: var(--on-background);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
+
+  --font-inter: "Inter", sans-serif;
+  --font-space: "Space Grotesk", monospace;
+
+  --spacing-element-gap: 24px;
+  --spacing-section-gap: 120px;
+  --spacing-stack-gap: 12px;
+  --spacing-card-padding: 32px;
+  --spacing-container-max: 1100px;
+
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --shadow-premium: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@utility glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-premium);
+}
+
+:root {
+  --background: #FCFDFB;
+  --surface: #FFFFFF;
+  --surface-variant: #F4F7F6;
+  --surface-container: #F8FAF9;
+  --primary: #10B981;
+  --primary-hover: #059669;
+  --primary-container: #ECFDF5;
+  --secondary: #34D399;
+  --tertiary: #6EE7B7;
+  --on-background: #0F172A;
+  --on-surface: #111827;
+  --on-surface-variant: #475569;
+  --outline: #E2E8F0;
+  --error: #EF4444;
+  --error-container: #FEE2E2;
+  --on-error: #7F1D1D;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(16, 185, 129, 0.1);
+}
+
+.dark {
+  --background: #061612;
+  --surface: #0b221d;
+  --surface-variant: #112F28;
+  --surface-container: #0d2c24;
+  --primary: #10B981;
+  --primary-hover: #34D399;
+  --primary-container: #064E3B;
+  --secondary: #34D399;
+  --tertiary: #6EE7B7;
+  --on-background: #ECFDF5;
+  --on-surface: #F9FAFB;
+  --on-surface-variant: #94A3B8;
+  --outline: #4B635D;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error: #ffdad6;
+  --glass-bg: rgba(13, 44, 36, 0.7);
+  --glass-border: rgba(16, 185, 129, 0.1);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-background);
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
