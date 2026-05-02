@@ -1,48 +1,105 @@
+"use client";
+import { motion } from "framer-motion";
+
 export default function TechStack() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const stack = [
+    {
+      title: "Frontend Core",
+      icon: "html",
+      skills: ["HTML5", "CSS3", "JavaScript (ES6+)"],
+      color: "var(--primary)"
+    },
+    {
+      title: "Frameworks",
+      icon: "grid_view",
+      skills: ["React.js", "Next.js", "Vite"],
+      color: "var(--primary)"
+    },
+    {
+      title: "UI Libraries",
+      icon: "palette",
+      skills: ["Tailwind CSS", "Daisy UI", "Framer Motion", "Hero UI"],
+      color: "var(--tertiary)"
+    }
+  ];
+
   return (
     <section className="mb-section-gap px-6 md:px-12" id="tech-stack">
-      <h2 className="font-inter text-3xl md:text-4xl font-bold text-on-surface mb-12 text-center">Tech Stack</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Frontend Core */}
-        <div className="bg-surface border border-outline p-6 md:p-card-padding rounded-xl border-t-2 border-t-primary shadow-premium">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="material-symbols-outlined text-primary">html</span>
-            <h4 className="font-inter text-lg md:text-xl font-semibold text-on-surface">Frontend Core</h4>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">HTML5</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">CSS3</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">JavaScript (ES6+)</span>
-          </div>
-        </div>
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="font-inter text-3xl md:text-5xl font-bold text-on-surface mb-16 text-center"
+      >
+        Tech Stack
+      </motion.h2>
 
-        {/* Frameworks */}
-        <div className="bg-surface border border-outline p-6 md:p-card-padding rounded-xl border-t-2 border-t-primary shadow-premium">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="material-symbols-outlined text-primary">grid_view</span>
-            <h4 className="font-inter text-lg md:text-xl font-semibold text-on-surface">Frameworks</h4>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">React.js</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">Next.js</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">Vite</span>
-          </div>
-        </div>
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {stack.map((group, index) => (
+          <motion.div
+            key={index}
+            variants={cardVariants}
+            whileHover={{ 
+              y: -10,
+              boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+              borderColor: group.color 
+            }}
+            className="bg-surface border border-outline p-8 rounded-3xl shadow-premium transition-colors duration-300 relative group overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div className="flex items-center gap-4 mb-8 relative z-10">
+              <motion.span 
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.5 }}
+                className="material-symbols-outlined text-3xl md:text-4xl p-3 bg-primary-container rounded-2xl text-primary"
+                style={{ color: group.color }}
+              >
+                {group.icon}
+              </motion.span>
+              <h4 className="font-inter text-xl md:text-2xl font-bold text-on-surface">{group.title}</h4>
+            </div>
 
-        {/* UI Libraries */}
-        <div className="bg-surface border border-outline p-6 md:p-card-padding rounded-xl border-t-2 border-t-tertiary shadow-premium">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="material-symbols-outlined text-tertiary">palette</span>
-            <h4 className="font-inter text-lg md:text-xl font-semibold text-on-surface">UI Libraries</h4>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">Tailwind CSS</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">Daisy UI</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">Framer Motion</span>
-            <span className="px-3 py-1 bg-primary-container text-primary rounded text-[10px] md:text-xs font-bold font-space">Hero UI</span>
-          </div>
-        </div>
-      </div>
+            <div className="flex flex-wrap gap-3 relative z-10">
+              {group.skills.map((skill, i) => (
+                <motion.span
+                  key={i}
+                  whileHover={{ scale: 1.1, backgroundColor: "var(--primary)", color: "white" }}
+                  className="px-4 py-2 bg-surface-variant border border-outline text-on-surface-variant rounded-xl text-xs md:text-sm font-bold font-space transition-colors cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }

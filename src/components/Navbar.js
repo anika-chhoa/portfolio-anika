@@ -2,13 +2,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState("hero");
   const pathname = usePathname();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     // Initial theme check
@@ -19,35 +20,29 @@ export default function Navbar() {
       if (savedTheme === "light") {
         setIsDark(false);
         document.documentElement.classList.remove("dark");
-      } else if (savedTheme === "dark" || prefersDark) {
+      } else {
         setIsDark(true);
         document.documentElement.classList.add("dark");
       }
     }
 
-    // Intersection Observer for active link
-    const sections = ["projects", "about", "services", "contact"];
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -70% 0px",
-      threshold: 0,
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
+      const sections = ["hero", "about", "tech-stack", "education", "projects", "services", "contact"];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
         }
+        return false;
       });
+      if (current) setActiveSection(current);
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -70,9 +65,15 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline">
-      <nav className="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <Link href="/" className="text-xl font-bold text-primary font-inter tracking-tight italic">Anika</Link>
+    <header 
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "bg-surface/70 backdrop-blur-lg border-b border-outline py-2" : "bg-transparent py-4"
+      }`}
+    >
+      <nav className="flex justify-between items-center px-6 md:px-12 max-w-7xl mx-auto">
+        <Link href="/" className="text-2xl font-bold text-primary font-inter tracking-tighter italic hover:scale-105 transition-transform">
+          Anika
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
@@ -80,12 +81,20 @@ export default function Navbar() {
             <Link
               key={link.id}
               href={link.href}
-              className={`font-inter tracking-tight transition-all duration-300 pb-1 border-b-2 ${activeSection === link.id && pathname === "/"
-                ? "text-primary border-primary font-semibold"
-                : "text-on-surface-variant border-transparent hover:text-primary font-medium"
-                }`}
+              className={`relative font-inter tracking-tight transition-colors duration-300 ${
+                activeSection === link.id && pathname === "/"
+                  ? "text-primary font-bold"
+                  : "text-on-surface-variant hover:text-primary font-medium"
+              }`}
             >
               {link.name}
+              {activeSection === link.id && pathname === "/" && (
+                <motion.div
+                  layoutId="navUnderline"
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
             </Link>
           ))}
         </div>
@@ -98,12 +107,16 @@ export default function Navbar() {
 
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-surface-variant transition-colors group"
+            className="p-2 rounded-lg hover:bg-surface-variant transition-colors group relative"
             aria-label="Toggle theme"
           >
-            <span className="material-symbols-outlined text-on-surface group-hover:text-primary transition-colors">
+            <motion.span 
+              initial={false}
+              animate={{ rotate: isDark ? 0 : 180 }}
+              className="material-symbols-outlined text-on-surface group-hover:text-primary transition-colors block"
+            >
               {isDark ? "light_mode" : "dark_mode"}
-            </span>
+            </motion.span>
           </button>
 
           {/* Mobile Menu Toggle */}
@@ -120,28 +133,35 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu Dropdown */}
-      <div
-        className={`md:hidden absolute top-16 left-0 w-full bg-surface border-b border-outline transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-64 py-4" : "max-h-0"
-          }`}
-      >
-        <div className="flex flex-col items-center gap-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.id}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className={`font-inter text-lg transition-colors ${activeSection === link.id && pathname === "/" ? "text-primary font-semibold" : "text-on-surface-variant"
-                }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="sm:hidden flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container border border-primary/20">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <span className="text-xs font-space text-primary">Open to Work</span>
-          </div>
-        </div>
-      </div>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-outline overflow-hidden shadow-xl"
+          >
+            <div className="flex flex-col items-center gap-6 py-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`font-inter text-2xl transition-colors ${
+                    activeSection === link.id && pathname === "/" ? "text-primary font-bold" : "text-on-surface-variant"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="sm:hidden flex items-center gap-2 px-4 py-2 rounded-full bg-primary-container border border-primary/20">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span className="text-xs font-space text-primary uppercase font-bold tracking-widest">Open to Work</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

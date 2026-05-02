@@ -1,5 +1,6 @@
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -13,17 +14,17 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata = {
   title: "Anika Mizan | Frontend Developer Portfolio",
-  description: "Crafting immersive, high-performance web experiences with technical precision.",
+  description: "Modern portfolio of Anika Mizan, a Frontend Developer specializing in React and Next.js.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}>
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" />
       </head>
-      <body className="antialiased">
-        {children}
+      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
