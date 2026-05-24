@@ -133,8 +133,8 @@ export default function Hero() {
           className="flex flex-wrap justify-center lg:justify-start gap-6 pt-4"
         >
           <motion.a
-            href="/public/Anika_Mizan_Frontend_Developer_Resume.pdf"
-            download="Anika-Mizan-Resume.pdf"
+            href="https://drive.google.com/file/d/1cDG1dwbOX7L8YT0jzSUEPBiQJUqGjORB/view?usp=sharing"
+            
             whileHover={{
               scale: 1.05,
               boxShadow: "0 0 20px rgba(16, 185, 129, 0.4)",
