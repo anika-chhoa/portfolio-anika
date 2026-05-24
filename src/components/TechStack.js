@@ -59,7 +59,7 @@ export default function TechStack() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {stack.map((group, index) => (
           <motion.div
@@ -86,7 +86,7 @@ export default function TechStack() {
               <h4 className="font-inter text-xl md:text-2xl font-bold text-on-surface">{group.title}</h4>
             </div>
 
-            <div className="flex flex-wrap gap-3 relative z-10">
+            <div className="flex flex-wrap gap-2 relative z-10">
               {group.skills.map((skill, i) => (
                 <motion.span
                   key={i}

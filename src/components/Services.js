@@ -21,8 +21,8 @@ export default function Services() {
 
   const expertise = [
     {
-      title: "Web Development",
-      desc: "Building fast, responsive, and scalable web applications using the latest technologies like Next.js and Tailwind.",
+      title: "Modern Web Interfaces",
+      desc: "Building clean, responsive, and performance-optimized web interfaces using React, Next.js, Tailwind CSS, and Framer Motion for smooth user experiences.",
       icon: "code",
     },
     {
