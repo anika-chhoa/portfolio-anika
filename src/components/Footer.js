@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-wrap justify-center gap-6">
           <a className="text-xs md:text-sm font-inter text-on-surface-variant hover:text-primary transition-colors" href="https://github.com/anika-chhoa" target="_blank">GitHub</a>
           <a className="text-xs md:text-sm font-inter text-on-surface-variant hover:text-primary transition-colors" href="https://www.linkedin.com/in/anika-mizan-chhoa" target="_blank">LinkedIn</a>
-          <a className="text-xs md:text-sm font-inter text-on-surface-variant hover:text-primary transition-colors" href="#">Resume</a>
+          <a className="text-xs md:text-sm font-inter text-on-surface-variant hover:text-primary transition-colors" href="https://drive.google.com/file/d/1cDG1dwbOX7L8YT0jzSUEPBiQJUqGjORB/view?usp=sharing">Resume</a>
         </div>
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-primary text-sm">location_on</span>
