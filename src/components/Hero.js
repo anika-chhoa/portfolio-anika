@@ -144,7 +144,6 @@ export default function Hero() {
             className="px-10 py-5 bg-primary text-white font-bold rounded-2xl transition-all flex items-center gap-3 shadow-premium text-lg"
           >
             Resume
-            <span className="material-symbols-outlined">download</span>
           </motion.a>
         </motion.div>
       </div>
