@@ -24,15 +24,15 @@ export default function TechStack() {
 
   const stack = [
     {
-      title: "Frontend Core",
+      title: "Frontend",
       icon: "html",
-      skills: ["HTML5", "CSS3", "JavaScript (ES6+)"],
+      skills: ["HTML5", "CSS3", "JavaScript (ES6+)", "React", "Next.js"],
       color: "var(--primary)"
     },
     {
-      title: "Frameworks",
+      title: "Backend",
       icon: "grid_view",
-      skills: ["React.js", "Next.js", "Vite"],
+      skills: ["Node.js", "Express.js","MongoDB", "Better Auth", "JWT Authentication", "API Router"],
       color: "var(--primary)"
     },
     {
