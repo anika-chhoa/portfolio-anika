@@ -320,11 +320,11 @@ export default function Hero() {
             I am a{" "}
             <TypeAnimation
               sequence={[
+                "MERN Stack Developer",
+                2000,
+                "Full Stack Developer",
+                2000,
                 "Frontend Developer",
-                2000,
-                "React Developer",
-                2000,
-                "Next.js Developer",
                 2000,
               ]}
               wrapper="span"
