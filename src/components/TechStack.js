@@ -115,7 +115,7 @@ export default function TechStack() {
   };
 
   return (
-    <section className="mb-section-gap px-6 md:px-12" id="skills">
+    <section className="mb-section-gap px-6 md:px-12 scroll-mt-24" id="skills">
       
       {/* Background Soft Glow */}
       <div 
