@@ -1,5 +1,3 @@
-// 
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -8,29 +6,31 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") !== "light";
+    }
+    return true;
+  });
   const [activeSection, setActiveSection] = useState("hero");
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // Initial theme check
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "light") {
-        setIsDark(false);
-        document.documentElement.classList.remove("dark");
-      } else {
-        setIsDark(true);
-        document.documentElement.classList.add("dark");
-      }
+    // Sync theme class + cookie on mount
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      document.cookie = "theme=dark; path=/; max-age=31536000";
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.cookie = "theme=light; path=/; max-age=31536000";
     }
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Section ID Tracker (Added "skills" right after "about")
+      // Section ID Tracker (Added "skills" & "education")
       const sections = [
         "about",
         "skills",
@@ -68,17 +68,20 @@ export default function Navbar() {
     if (newIsDark) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
+      document.cookie = "theme=dark; path=/; max-age=31536000";
     } else {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
+      document.cookie = "theme=light; path=/; max-age=31536000";
     }
   };
 
-  // Added Skills after About
+  // NavLinks with Education added after Experience
   const navLinks = [
     { name: "About", href: "/#about", id: "about" },
     { name: "Skills", href: "/#skills", id: "skills" },
     { name: "Experience", href: "/#experience", id: "experience" },
+    { name: "Education", href: "/#education", id: "education" },
     { name: "Projects", href: "/#projects", id: "projects" },
     { name: "Services", href: "/#services", id: "services" },
     { name: "Contact", href: "/#contact", id: "contact" },
@@ -101,7 +104,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.id}
@@ -166,7 +169,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-outline overflow-hidden shadow-xl"
+            className="lg:hidden absolute top-full left-0 w-full bg-surface border-b border-outline overflow-hidden shadow-xl"
           >
             <div className="flex flex-col items-center gap-6 py-8">
               {navLinks.map((link) => (

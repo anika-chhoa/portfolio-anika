@@ -1,8 +1,9 @@
 import { Inter, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
+import { cookies } from "next/headers";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
-// Fonts initialization - top level
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -21,11 +22,26 @@ export const metadata = {
     "Modern portfolio of Anika Mizan, a Frontend Developer specializing in React and Next.js.",
 };
 
-export default function RootLayout({ children }) {
+const themeScript = `
+(function(){
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme:dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {}
+})();
+`;
+
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme")?.value;
+  const isDark = theme !== "light";
+
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}
+      className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth${isDark ? " dark" : ""}`}
       suppressHydrationWarning
     >
       <head>
@@ -33,25 +49,13 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
         />
-        {/* Anti-flash Dark Mode Script */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var savedTheme = localStorage.getItem('theme');
-                  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
       </head>
       <body className="font-inter antialiased">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
         <Providers>{children}</Providers>
       </body>
     </html>

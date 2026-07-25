@@ -341,10 +341,7 @@ export default function Hero() {
           transition={{ delay: 1.2, duration: 1 }}
           className="font-inter text-base md:text-xl text-on-surface-variant max-w-2xl mx-auto md:mx-0 leading-relaxed opacity-80"
         >
-          Crafting immersive, high-performance web experiences with technical
-          precision. I specialize in building scalable frontend architectures
-          that bridge the gap between complex data and intuitive user
-          interfaces.
+          Transforming complex ideas into scalable, high-converting digital products. Leveraging strong data research, modern MERN stack, secure auth, and AI workflows to build end-to-end web applications
         </motion.p>
 
         {/* Resume Download CTA */}

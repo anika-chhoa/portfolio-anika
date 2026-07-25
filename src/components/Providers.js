@@ -16,6 +16,14 @@ export default function Providers({ children }) {
   });
 
   useEffect(() => {
+    // 0. Restore theme from localStorage on every page
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else if (savedTheme === "light") {
+      document.documentElement.classList.remove("dark");
+    }
+
     // 1. Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
       duration: 1.2,

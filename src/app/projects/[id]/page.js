@@ -274,8 +274,62 @@ export default async function ProjectDetails({ params }) {
   const nextProject =
     currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
 
+  // Helper markup variables for responsive ordering (to avoid duplication)
+  const deploymentLinksMarkup = (
+    <div className="glass-card p-6 rounded-2xl space-y-5 border border-outline shadow-premium">
+      <div className="flex items-center gap-2 text-on-surface font-space font-bold text-lg">
+        <FaRocket className="text-primary" />
+        <h3>Deployment & Links</h3>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        {project.live && (
+          <a
+            href={project.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-surface-container font-semibold px-4 py-3 rounded-xl shadow-sm transition-all duration-200 active:scale-[0.98]"
+          >
+            <FaExternalLinkAlt className="text-xs" /> Live Preview
+          </a>
+        )}
+
+        {project.client && (
+          <a
+            href={project.client}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full inline-flex items-center justify-center gap-2 bg-surface-variant hover:bg-surface-container text-on-surface font-medium px-4 py-2.5 rounded-xl border border-outline transition-colors duration-200 text-sm"
+          >
+            <FaGithub /> GitHub
+          </a>
+        )}
+      </div>
+    </div>
+  );
+
+  const techStackMarkup = (
+    <div className="glass-card p-6 rounded-2xl space-y-4 border border-outline shadow-premium">
+      <div className="flex items-center gap-2 text-on-surface font-space font-bold text-lg">
+        <FaCode className="text-primary" />
+        <h3>Technologies Used</h3>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {project.tags.map((tag, index) => (
+          <span
+            key={index}
+            className="bg-surface-container text-primary font-mono text-xs font-semibold px-3 py-1.5 rounded-lg border border-outline hover:border-primary/40 transition-colors"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
-    <main className="min-h-screen bg-background text-on-background transition-colors duration-300 py-10 px-4 sm:px-6 lg:px-8 relative">
+    <main className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-container-max mx-auto space-y-8 pb-16">
         
         {/* Top Navigation */}
@@ -330,6 +384,12 @@ export default async function ProjectDetails({ params }) {
                 {project.description}
               </p>
             </section>
+
+            {/* Mobile-only Deployment & Tech Stack (visible only on small screens) */}
+            <div className="block lg:hidden space-y-6">
+              {deploymentLinksMarkup}
+              {techStackMarkup}
+            </div>
 
             {/* Key Features Section */}
             {project.features?.length > 0 && (
@@ -447,66 +507,10 @@ export default async function ProjectDetails({ params }) {
           {/* ================================================= */}
           <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-8">
             
-            {/* Deployment CTAs */}
-            <div className="glass-card p-6 rounded-2xl space-y-5 border border-outline shadow-premium">
-              <div className="flex items-center gap-2 text-on-surface font-space font-bold text-lg">
-                <FaRocket className="text-primary" />
-                <h3>Deployment & Links</h3>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-surface-container font-semibold px-4 py-3 rounded-xl shadow-sm transition-all duration-200 active:scale-[0.98]"
-                  >
-                    <FaExternalLinkAlt className="text-xs" /> Live Preview
-                  </a>
-                )}
-
-                {project.client && (
-                  <a
-                    href={project.client}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-surface-variant hover:bg-surface-container text-on-surface font-medium px-4 py-2.5 rounded-xl border border-outline transition-colors duration-200 text-sm"
-                  >
-                    <FaGithub /> Client Repo
-                  </a>
-                )}
-
-                {/* {project.server && (
-                  <a
-                    href={project.server}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-surface-variant hover:bg-surface-container text-on-surface font-medium px-4 py-2.5 rounded-xl border border-outline transition-colors duration-200 text-sm"
-                  >
-                    <FaGithub /> Server Repo
-                  </a>
-                )} */}
-              </div>
-            </div>
-
-            {/* Tech Stack Pills */}
-            <div className="glass-card p-6 rounded-2xl space-y-4 border border-outline shadow-premium">
-              <div className="flex items-center gap-2 text-on-surface font-space font-bold text-lg">
-                <FaCode className="text-primary" />
-                <h3>Technologies Used</h3>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-surface-container text-primary font-mono text-xs font-semibold px-3 py-1.5 rounded-lg border border-outline hover:border-primary/40 transition-colors"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            {/* Desktop-only Deployment & Tech Stack */}
+            <div className="hidden lg:block space-y-6">
+              {deploymentLinksMarkup}
+              {techStackMarkup}
             </div>
 
             {/* Architecture Card */}

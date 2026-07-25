@@ -120,7 +120,7 @@ import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
-import { FaEnvelope, FaPaperPlane, FaPhone, FaSpinner } from "react-icons/fa";
+import { FaEnvelope, FaPaperPlane, FaPhone, FaSpinner, FaWhatsapp } from "react-icons/fa";
 
 export default function Contact() {
   const formRef = useRef(null);
@@ -216,7 +216,7 @@ export default function Contact() {
                 backgroundColor: "var(--primary-container)",
               }}
               className="flex items-center gap-6 p-5 rounded-2xl bg-surface-variant/30 border border-outline transition-all group/card"
-              href="tel:01761651313"
+              href="tel:+8801761651313"
             >
               <div className="w-14 h-14 rounded-xl bg-primary text-white flex items-center justify-center shadow-premium group-hover/card:scale-110 transition-transform">
                 <FaPhone className="text-2xl" />
@@ -225,7 +225,28 @@ export default function Contact() {
                 <p className="text-xs font-black font-space text-primary uppercase tracking-widest mb-1">
                   Mobile
                 </p>
-                <p className="font-bold text-lg text-on-surface">01761651313</p>
+                <p className="font-bold text-lg text-on-surface">+8801761651313</p>
+              </div>
+            </motion.a>
+
+            <motion.a
+              whileHover={{
+                x: 10,
+                backgroundColor: "var(--primary-container)",
+              }}
+              className="flex items-center gap-6 p-5 rounded-2xl bg-surface-variant/30 border border-outline transition-all group/card"
+              href="https://wa.me/8801761651313"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="w-14 h-14 rounded-xl bg-primary text-white flex items-center justify-center shadow-premium group-hover/card:scale-110 transition-transform">
+                <FaWhatsapp className="text-2xl" />
+              </div>
+              <div className="text-left">
+                <p className="text-xs font-black font-space text-primary uppercase tracking-widest mb-1">
+                  WhatsApp
+                </p>
+                <p className="font-bold text-lg text-on-surface">+8801761651313</p>
               </div>
             </motion.a>
           </div>
