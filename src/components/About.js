@@ -28,7 +28,7 @@ export default function About() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
-      className="mb-section-gap px-6 md:px-0"
+      className="mb-section-gap scroll-mt-24 px-6 md:px-0"
       id="about"
     >
       <motion.h2 variants={itemVariants} className="font-inter text-3xl md:text-5xl font-bold text-on-surface mb-8">
@@ -41,19 +41,28 @@ export default function About() {
           <motion.div variants={itemVariants} className="w-20 h-1 bg-primary"></motion.div>
 
           <motion.p variants={itemVariants} className="font-inter text-sm md:text-lg text-on-surface-variant leading-relaxed opacity-90">
+            My journey into MERN Stack development began with the analytical mindset I developed during my Master's studies. Passionate about problem-solving, I transitioned into web development, building modern, scalable applications with Next.js, React, Express.js, and MongoDB.
+          </motion.p>
+          {/* <motion.p variants={itemVariants} className="font-inter text-sm md:text-lg text-on-surface-variant leading-relaxed opacity-90">
             I started my programming journey out of curiosity — trying to understand how websites work behind the scenes.
             Over time, it became a passion for building modern, interactive, and meaningful web applications.
-          </motion.p>
+          </motion.p> */}
 
           <motion.p variants={itemVariants} className="font-inter text-sm md:text-lg text-on-surface-variant leading-relaxed opacity-90">
+            I thrive on building full-stack applications with rich features—such as AI integrations with Google Gemini, Stripe payments, real-time chat, and secure authentication (JWT/BetterAuth). Connecting high-performance backend logic with responsive, polished UIs is what excites me most about full-stack development.
+          </motion.p>
+          {/* <motion.p variants={itemVariants} className="font-inter text-sm md:text-lg text-on-surface-variant leading-relaxed opacity-90">
             I enjoy working with React and Next.js, especially creating clean UI systems, reusable components,
             and smooth user experiences that feel intuitive and fast.
-          </motion.p>
+          </motion.p> */}
 
           <motion.p variants={itemVariants} className="font-inter text-sm md:text-lg text-on-surface-variant leading-relaxed opacity-90">
+            Beyond coding, I enjoy painting, reading tech blogs, traveling, and solving logic puzzles.  Combining analytical thinking with my favorite activities helps me stay focused, communicate effectively, and continuously evolve as a developer.
+          </motion.p>
+          {/* <motion.p variants={itemVariants} className="font-inter text-sm md:text-lg text-on-surface-variant leading-relaxed opacity-90">
             Outside programming, I enjoy exploring design ideas, listening to music, and observing real-world problems
             that can be solved through technology.
-          </motion.p>
+          </motion.p> */}
         </div>
 
         {/* RIGHT SIDE - PERSONALITY + INTERESTS */}

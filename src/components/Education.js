@@ -68,7 +68,7 @@ export default function Education() {
 
   return (
     <section
-      className="mb-section-gap px-6 md:px-12 flex flex-col items-center"
+      className="mb-section-gap scroll-mt-24 px-6 md:px-12 flex flex-col items-center"
       id="education"
     >
       {/* Header */}

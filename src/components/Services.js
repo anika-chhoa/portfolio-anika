@@ -21,29 +21,29 @@ export default function Services() {
 
   const expertise = [
     {
-      title: "Modern Web Interfaces",
-      desc: "Building clean, responsive, and performance-optimized web interfaces using React, Next.js, Tailwind CSS, and Framer Motion for smooth user experiences.",
+      title: "Full-Stack Web Development",
+      desc: "Building scalable full-stack applications using Next.js, React, Node.js, Express.js, and MongoDB with clean architecture and RESTful APIs.",
       icon: "code",
     },
     {
-      title: "Full-Stack Development",
-      desc: "Connecting beautiful frontends with robust backends and efficient database schemas.",
-      icon: "layers",
-    },
-    {
-      title: "Authentication & User Systems",
-      desc: "Implementing secure authentication using Better Auth, including login, registration, and session management.",
+      title: "Authentication & Secure Payments",
+      desc: "Implementing secure authentication with Better Auth, JWT, Google OAuth, and Stripe for secure payment and booking workflows.",
       icon: "verified_user",
     },
     {
-      title: "UI/UX Design",
-      desc: "Creating visually stunning and highly intuitive user interfaces with a focus on modern aesthetics and user experience.",
-      icon: "design_services",
+      title: "Database & Backend Systems",
+      desc: "Designing efficient MongoDB schemas, role-based access control, backend filtering, booking systems, and scalable API solutions.",
+      icon: "storage",
+    },
+    {
+      title: "AI-Powered Applications",
+      desc: "Integrating Google Gemini AI to build intelligent features such as recommendations, content generation, and AI-assisted user experiences.",
+      icon: "auto_awesome",
     },
   ];
 
   return (
-    <section className="mb-section-gap px-6 md:px-12" id="services">
+    <section className="mb-section-gap scroll-mt-24 px-6 md:px-12" id="services">
       <motion.h2
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
